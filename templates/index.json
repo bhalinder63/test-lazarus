@@ -1,12 +1,4 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */{
+{
   "sections": {
     "hero_jVaWmY": {
       "type": "hero",
@@ -86,6 +78,291 @@
         "reflection_opacity": 75,
         "padding-block-start": 100,
         "padding-block-end": 72
+      }
+    },
+    "why_us_B8kNpQ": {
+      "type": "section",
+      "blocks": {
+        "why_us_heading": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>Why us?</h2>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          }
+        },
+        "columns": {
+          "type": "group",
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-start",
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 32,
+            "width": "fill",
+            "height": "fit",
+            "inherit_color_scheme": true
+          },
+          "blocks": {
+            "group_1": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "horizontal_alignment_flex_direction_column": "center",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 16,
+                "height": "fit",
+                "inherit_color_scheme": true
+              },
+              "blocks": {
+                "icon_1": {
+                  "type": "icon",
+                  "settings": {
+                    "icon": "leaf",
+                    "width": 32,
+                    "link": ""
+                  }
+                },
+                "text_group_1": {
+                  "type": "group",
+                  "settings": {
+                    "content_direction": "column",
+                    "gap": 8,
+                    "horizontal_alignment_flex_direction_column": "center",
+                    "inherit_color_scheme": true
+                  },
+                  "blocks": {
+                    "heading_1": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<h3>SOY WAX</h3>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "center",
+                        "type_preset": "h4",
+                        "font": "var(--font-body--family)",
+                        "font_size": "",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      }
+                    },
+                    "desc_1": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>100% natural soy wax for a cleaner, longer-lasting burn you can feel good about.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "center",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      }
+                    }
+                  },
+                  "block_order": ["heading_1", "desc_1"]
+                }
+              },
+              "block_order": ["icon_1", "text_group_1"]
+            },
+            "group_2": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "horizontal_alignment_flex_direction_column": "center",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 16,
+                "height": "fit",
+                "inherit_color_scheme": true
+              },
+              "blocks": {
+                "icon_2": {
+                  "type": "icon",
+                  "settings": {
+                    "icon": "map_pin",
+                    "width": 32,
+                    "link": ""
+                  }
+                },
+                "text_group_2": {
+                  "type": "group",
+                  "settings": {
+                    "content_direction": "column",
+                    "gap": 8,
+                    "horizontal_alignment_flex_direction_column": "center",
+                    "inherit_color_scheme": true
+                  },
+                  "blocks": {
+                    "heading_2": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<h3>CLEAN BURN</h3>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "center",
+                        "type_preset": "h4",
+                        "font": "var(--font-body--family)",
+                        "font_size": "",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      }
+                    },
+                    "desc_2": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>No toxins, no parabens. Just pure fragrance and carefully chosen natural ingredients.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "center",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      }
+                    }
+                  },
+                  "block_order": ["heading_2", "desc_2"]
+                }
+              },
+              "block_order": ["icon_2", "text_group_2"]
+            },
+            "group_3": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "horizontal_alignment_flex_direction_column": "center",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 16,
+                "height": "fit",
+                "inherit_color_scheme": true
+              },
+              "blocks": {
+                "icon_3": {
+                  "type": "icon",
+                  "settings": {
+                    "icon": "heart",
+                    "width": 32,
+                    "link": ""
+                  }
+                },
+                "text_group_3": {
+                  "type": "group",
+                  "settings": {
+                    "content_direction": "column",
+                    "gap": 8,
+                    "horizontal_alignment_flex_direction_column": "center",
+                    "inherit_color_scheme": true
+                  },
+                  "blocks": {
+                    "heading_3": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<h3>HAND POURED</h3>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "center",
+                        "type_preset": "h4",
+                        "font": "var(--font-body--family)",
+                        "font_size": "",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      }
+                    },
+                    "desc_3": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Every candle is handcrafted in small batches with genuine care and attention to detail.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "center",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      }
+                    }
+                  },
+                  "block_order": ["heading_3", "desc_3"]
+                }
+              },
+              "block_order": ["icon_3", "text_group_3"]
+            }
+          },
+          "block_order": ["group_1", "group_2", "group_3"]
+        }
+      },
+      "block_order": ["why_us_heading", "columns"],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 40,
+        "section_width": "page-width",
+        "section_height": "",
+        "color_scheme": "scheme-1",
+        "background_media": "none",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "padding-block-start": 64,
+        "padding-block-end": 64
       }
     },
     "product_list_fa6P9H": {
@@ -285,6 +562,7 @@
   },
   "order": [
     "hero_jVaWmY",
+    "why_us_B8kNpQ",
     "product_list_fa6P9H"
   ]
 }
