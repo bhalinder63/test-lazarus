@@ -1,0 +1,573 @@
+{%- liquid
+  assign image_left = true
+  if section.settings.image_position == 'right'
+    assign image_left = false
+  endif
+
+  assign section_id = 'ExclusiveOffer-' | append: section.id
+-%}
+
+<div
+  id="{{ section_id }}"
+  class="exclusive-offer color-{{ section.settings.color_scheme }}"
+  style="
+    --exclusive-offer-bg: {{ section.settings.background_color }};
+    --exclusive-offer-text: {{ section.settings.text_color }};
+    --exclusive-offer-accent: {{ section.settings.accent_color }};
+    {%- render 'spacing-style', settings: section.settings -%}
+    {%- case section.settings.section_height -%}
+      {%- when 'small' -%}
+        --exclusive-offer-height: var(--section-height-small);
+      {%- when 'medium' -%}
+        --exclusive-offer-height: var(--section-height-medium);
+      {%- when 'large' -%}
+        --exclusive-offer-height: var(--section-height-large);
+      {%- when 'auto' -%}
+        --exclusive-offer-height: auto;
+    {%- endcase -%}
+  "
+  {{ section.shopify_attributes }}
+>
+  <div class="exclusive-offer__grid{% if image_left == false %} exclusive-offer__grid--image-right{% endif %}">
+    {%- # Image column -%}
+    <div class="exclusive-offer__media">
+      {%- if section.settings.image != blank -%}
+        {%- assign exclusive_offer_image_alt = section.settings.image.alt | escape -%}
+        {{
+          section.settings.image
+          | image_url: width: 1920
+          | image_tag:
+            width: section.settings.image.width,
+            widths: '416, 600, 800, 1200, 1600, 1920',
+            height: section.settings.image.height,
+            alt: exclusive_offer_image_alt,
+            class: 'exclusive-offer__image',
+            sizes: '(min-width: 750px) 50vw, 100vw',
+            loading: 'lazy'
+        }}
+      {%- else -%}
+        {{ 'hero-apparel-1' | placeholder_svg_tag: 'exclusive-offer__image exclusive-offer__placeholder' }}
+      {%- endif -%}
+    </div>
+
+    {%- # Content column -%}
+    <div class="exclusive-offer__content">
+      {%- if section.settings.show_decorative_dots -%}
+        <div class="exclusive-offer__dots" aria-hidden="true"></div>
+      {%- endif -%}
+
+      <div class="exclusive-offer__content-inner">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="exclusive-offer__heading">
+            {{- section.settings.heading | escape -}}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.description != blank -%}
+          <div class="exclusive-offer__description">
+            {{- section.settings.description -}}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.show_countdown -%}
+          <countdown-timer
+            class="exclusive-offer__countdown"
+            data-end-date="{{ section.settings.countdown_end_date }}"
+            aria-label="{{ 'sections.exclusive_offer.countdown.aria_label' | t }}"
+            role="timer"
+          >
+            <div class="exclusive-offer__countdown-grid">
+              <div class="exclusive-offer__countdown-unit">
+                <span class="exclusive-offer__countdown-number" data-days>00</span>
+                <span class="exclusive-offer__countdown-label">{{ 'sections.exclusive_offer.countdown.days' | t }}</span>
+              </div>
+              <span class="exclusive-offer__countdown-separator" aria-hidden="true">:</span>
+              <div class="exclusive-offer__countdown-unit">
+                <span class="exclusive-offer__countdown-number" data-hours>00</span>
+                <span class="exclusive-offer__countdown-label">{{ 'sections.exclusive_offer.countdown.hours' | t }}</span>
+              </div>
+              <span class="exclusive-offer__countdown-separator" aria-hidden="true">:</span>
+              <div class="exclusive-offer__countdown-unit">
+                <span class="exclusive-offer__countdown-number" data-minutes>00</span>
+                <span class="exclusive-offer__countdown-label">{{ 'sections.exclusive_offer.countdown.minutes' | t }}</span>
+              </div>
+              <span class="exclusive-offer__countdown-separator" aria-hidden="true">:</span>
+              <div class="exclusive-offer__countdown-unit">
+                <span class="exclusive-offer__countdown-number" data-seconds>00</span>
+                <span class="exclusive-offer__countdown-label">{{ 'sections.exclusive_offer.countdown.seconds' | t }}</span>
+              </div>
+            </div>
+            <p class="exclusive-offer__countdown-expired" hidden>
+              {{ 'sections.exclusive_offer.countdown.expired' | t }}
+            </p>
+          </countdown-timer>
+        {%- endif -%}
+
+        {%- if section.settings.button_text != blank -%}
+          <a
+            href="{{ section.settings.button_link }}"
+            class="exclusive-offer__button button"
+          >
+            {{- section.settings.button_text | escape -}}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .exclusive-offer {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--exclusive-offer-bg, var(--color-background));
+    color: var(--exclusive-offer-text, var(--color-foreground));
+  }
+
+  .exclusive-offer__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: var(--exclusive-offer-height, auto);
+  }
+
+  @media screen and (min-width: 750px) {
+    .exclusive-offer__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .exclusive-offer__grid--image-right .exclusive-offer__media {
+      order: 2;
+    }
+
+    .exclusive-offer__grid--image-right .exclusive-offer__content {
+      order: 1;
+    }
+  }
+
+  .exclusive-offer__media {
+    position: relative;
+    overflow: hidden;
+    min-height: 18rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    .exclusive-offer__media {
+      min-height: unset;
+    }
+  }
+
+  .exclusive-offer__image,
+  .exclusive-offer__placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .exclusive-offer__content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-block: var(--padding-block-start, var(--padding-5xl)) var(--padding-block-end, var(--padding-5xl));
+    padding-inline: var(--padding-xl);
+  }
+
+  @media screen and (min-width: 750px) {
+    .exclusive-offer__content {
+      padding-inline: var(--padding-5xl);
+    }
+  }
+
+  .exclusive-offer__content-inner {
+    position: relative;
+    z-index: var(--layer-flat);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xl);
+    max-width: 32rem;
+    width: 100%;
+  }
+
+  .exclusive-offer__heading {
+    font-family: var(--font-heading--family);
+    font-size: var(--font-h2--size, var(--font-size--3xl));
+    font-weight: var(--font-heading--weight, 700);
+    line-height: var(--line-height--heading-normal);
+    color: var(--exclusive-offer-text, var(--color-foreground-heading));
+    margin: 0;
+  }
+
+  .exclusive-offer__description {
+    font-family: var(--font-body--family);
+    font-size: var(--font-paragraph--size, var(--font-size--md));
+    line-height: var(--line-height--body-normal);
+    color: var(--exclusive-offer-text, var(--color-foreground));
+  }
+
+  .exclusive-offer__description p {
+    margin: 0;
+  }
+
+  .exclusive-offer__countdown {
+    display: block;
+  }
+
+  .exclusive-offer__countdown-grid {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--gap-sm);
+  }
+
+  .exclusive-offer__countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-3xs);
+  }
+
+  .exclusive-offer__countdown-number {
+    font-family: var(--font-heading--family);
+    font-size: var(--font-size--3xl);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--exclusive-offer-accent, var(--color-foreground-heading));
+    background-color: rgb(255 255 255 / 0.3);
+    border-radius: var(--style-border-radius-sm);
+    padding-block: var(--padding-sm);
+    padding-inline: var(--padding-md);
+    min-width: 3.5rem;
+    text-align: center;
+  }
+
+  @media screen and (min-width: 750px) {
+    .exclusive-offer__countdown-number {
+      font-size: var(--font-size--4xl);
+      min-width: 4.5rem;
+      padding-block: var(--padding-lg);
+      padding-inline: var(--padding-lg);
+    }
+  }
+
+  .exclusive-offer__countdown-label {
+    font-family: var(--font-body--family);
+    font-size: var(--font-size--2xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--exclusive-offer-text, var(--color-foreground));
+    opacity: 0.8;
+  }
+
+  .exclusive-offer__countdown-separator {
+    font-family: var(--font-heading--family);
+    font-size: var(--font-size--3xl);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--exclusive-offer-accent, var(--color-foreground-heading));
+    padding-block-start: var(--padding-sm);
+  }
+
+  @media screen and (min-width: 750px) {
+    .exclusive-offer__countdown-separator {
+      font-size: var(--font-size--4xl);
+      padding-block-start: var(--padding-lg);
+    }
+  }
+
+  .exclusive-offer__countdown-expired {
+    font-family: var(--font-heading--family);
+    font-size: var(--font-size--xl);
+    font-weight: 600;
+    color: var(--exclusive-offer-accent, var(--color-foreground-heading));
+  }
+
+  .exclusive-offer__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding-block: var(--padding-md);
+    padding-inline: var(--padding-2xl);
+    font-family: var(--font-body--family);
+    font-size: var(--font-size--sm);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: var(--style-border-radius-buttons-primary, var(--style-border-radius-sm));
+    background-color: var(--exclusive-offer-accent, var(--color-primary-button-background));
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: opacity var(--animation-speed) var(--animation-easing);
+    align-self: flex-start;
+    min-height: var(--minimum-touch-target);
+  }
+
+  .exclusive-offer__button:hover {
+    opacity: 0.85;
+  }
+
+  .exclusive-offer__button:focus-visible {
+    outline: 2px solid var(--exclusive-offer-accent, var(--color-foreground));
+    outline-offset: 2px;
+  }
+
+  .exclusive-offer__dots {
+    position: absolute;
+    inset: 0;
+    z-index: var(--layer-base);
+    pointer-events: none;
+    opacity: 0.15;
+    background-image: radial-gradient(
+      circle,
+      var(--exclusive-offer-accent, var(--color-foreground)) 1px,
+      transparent 1px
+    );
+    background-size: 20px 20px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .exclusive-offer__button {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  class CountdownTimer extends HTMLElement {
+    /** @type {number|null} */
+    #intervalId = null;
+
+    connectedCallback() {
+      const endDateStr = this.dataset.endDate;
+      if (!endDateStr) return;
+
+      this.#update(endDateStr);
+      this.#intervalId = setInterval(() => this.#update(endDateStr), 1000);
+    }
+
+    disconnectedCallback() {
+      if (this.#intervalId) {
+        clearInterval(this.#intervalId);
+        this.#intervalId = null;
+      }
+    }
+
+    /**
+     * @param {string} endDateStr - ISO date string for countdown end
+     */
+    #update(endDateStr) {
+      const now = Date.now();
+      const end = new Date(endDateStr).getTime();
+      const diff = end - now;
+
+      const grid = this.querySelector('[class*="countdown-grid"]');
+      const expired = this.querySelector('[class*="countdown-expired"]');
+
+      if (!grid || !expired) return;
+
+      if (diff <= 0) {
+        grid.hidden = true;
+        expired.hidden = false;
+        if (this.#intervalId) {
+          clearInterval(this.#intervalId);
+          this.#intervalId = null;
+        }
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      const daysEl = this.querySelector('[data-days]');
+      const hoursEl = this.querySelector('[data-hours]');
+      const minutesEl = this.querySelector('[data-minutes]');
+      const secondsEl = this.querySelector('[data-seconds]');
+
+      if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+      if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+      if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+      if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
+    }
+  }
+
+  if (!customElements.get('countdown-timer')) {
+    customElements.define('countdown-timer', CountdownTimer);
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "t:names.exclusive_offer",
+  "tag": "section",
+  "class": "exclusive-offer-section section-wrapper",
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:settings.image"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "t:settings.image_position",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:options.left"
+        },
+        {
+          "value": "right",
+          "label": "t:options.right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "t:content.text"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:settings.heading",
+      "default": "Exclusive Offer"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:names.description",
+      "default": "<p>Don't miss our limited-time exclusive offer. Shop now and save on your favorite items before time runs out.</p>"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.exclusive_offer.settings.countdown_header.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_countdown",
+      "label": "t:sections.exclusive_offer.settings.show_countdown.label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "countdown_end_date",
+      "label": "t:sections.exclusive_offer.settings.countdown_end_date.label",
+      "info": "t:sections.exclusive_offer.settings.countdown_end_date.info",
+      "default": "2026-12-31T23:59:59"
+    },
+    {
+      "type": "header",
+      "content": "t:content.buttons"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "t:settings.label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:settings.link"
+    },
+    {
+      "type": "header",
+      "content": "t:content.colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "default": "#c8e6d7"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:sections.exclusive_offer.settings.text_color.label",
+      "default": "#2d5016"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "t:sections.exclusive_offer.settings.accent_color.label",
+      "default": "#3d6b2f"
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_decorative_dots",
+      "label": "t:sections.exclusive_offer.settings.show_decorative_dots.label",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "section_height",
+      "label": "t:settings.height",
+      "options": [
+        {
+          "value": "auto",
+          "label": "t:options.auto"
+        },
+        {
+          "value": "small",
+          "label": "t:options.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.large"
+        }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.exclusive_offer",
+      "category": "t:categories.banners"
+    }
+  ]
+}
+{% endschema %}
